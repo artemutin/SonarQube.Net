@@ -47,10 +47,10 @@ namespace SonarQube.Net
 			_url = url;
 		}
 
-		public SonarQubeClient(string url, BasicAuthentication basic)
+		public SonarQubeClient(string url, AuthenticationMethod auth)
 			: this(url)
 		{
-			_auth = basic;
+			_auth = auth;
 		}
 
 		public IFlurlRequest GetBaseUrl(string path) => new Url(_url)
