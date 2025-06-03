@@ -52,7 +52,7 @@ namespace SonarQube.Net
 			return await HandleResponseAsync(response).ConfigureAwait(false);
 		}
 
-		public async Task<IEnumerable<ProjectAnalysis>> SearchProjectAnalysesAsync(string project, EventCategories? category = null, int? p = null, int? ps = null, DateTime? from = null, DateTime? to = null)
+		public async Task<IEnumerable<ProjectAnalysis>> SearchProjectAnalysesAsync(string project, EventCategories? category = null, int? p = null, int? ps = null, DateTime? from = null, DateTime? to = null, string? branch= null)
 		{
 			var queryParamValues = new Dictionary<string, object>
 			{
@@ -61,7 +61,8 @@ namespace SonarQube.Net
 				[nameof(p)] = p,
 				[nameof(ps)] = ps,
 				[nameof(from)] = DateTimeToStringConverter.ToString(from, "yyyy-MM-dd"),
-				[nameof(to)] = DateTimeToStringConverter.ToString(to, "yyyy-MM-dd")
+				[nameof(to)] = DateTimeToStringConverter.ToString(to, "yyyy-MM-dd"),
+                [nameof(branch)] = branch
 			};
 
 			return await GetProjectAnalysesUrl("search")
